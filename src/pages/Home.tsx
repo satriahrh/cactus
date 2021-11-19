@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 const Home: React.FC = () => {
   const [present] = useIonToast();
   const [position, setPosition] = useState<Geoposition>();
+  const [location, setLocation] = useState<LocationData>();
 
   useEffect(() => {
     const getLocation = async () => {
@@ -32,21 +33,36 @@ const Home: React.FC = () => {
     getLocation();
   }, [present, position, setPosition]);
 
+  useEffect(() => {
+    if (position && !location) {
+      setLocation({
+        district: "Baleendah" + position.coords.latitude,
+        city: "Kab. Bandung",
+        province: "Jawa Barat",
+      });
+    }
+  }, [position, location]);
+
   return (
     <IonPage>
       <IonContent fullscreen>
-        <Location district="Baleendah" cityProvince="Bandung, Jawa Barat" />
+        {location && <Location data={location} />}
       </IonContent>
     </IonPage>
   );
 };
 
-type LocationProps = {
+type LocationData = {
   district: String;
-  cityProvince: String;
+  city: String;
+  province: String;
 };
 
-const Location = (props: LocationProps) => {
+type LocationProps = {
+  data: LocationData;
+};
+
+const Location = ({ data }: LocationProps) => {
   return (
     <IonItem
       class="ion-no-margin"
@@ -62,7 +78,7 @@ const Location = (props: LocationProps) => {
             margin: 0,
           }}
         >
-          {props.district}
+          {data.district}
         </h1>
         <br />
         <p
@@ -70,7 +86,7 @@ const Location = (props: LocationProps) => {
             margin: 0,
           }}
         >
-          {props.cityProvince}
+          {data.city}, {data.province}
         </p>
       </IonText>
       <IonButton
