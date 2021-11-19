@@ -5,15 +5,38 @@ import {
   IonItem,
   IonPage,
   IonText,
+  useIonToast,
 } from "@ionic/react";
 import { notificationsOutline } from "ionicons/icons";
+import { Geolocation, Geoposition } from "@ionic-native/geolocation";
 import "./Home.css";
+import { useEffect, useState } from "react";
 
 const Home: React.FC = () => {
+  const [present] = useIonToast();
+  const [position, setPosition] = useState<Geoposition>();
+
+  useEffect(() => {
+    const getLocation = async () => {
+      try {
+        if (!position) {
+          const currentPosition = await Geolocation.getCurrentPosition();
+          setPosition(currentPosition);
+          console.log(currentPosition);
+        }
+      } catch (error: any) {
+        present(error.message, 3000);
+        console.log("Error getting location", error);
+      }
+    };
+    getLocation();
+  }, [present, position, setPosition]);
+
   return (
     <IonPage>
-      <Location district="Baleendah" cityProvince="Bandung, Jawa Barat" />
-      <IonContent fullscreen></IonContent>
+      <IonContent fullscreen>
+        <Location district="Baleendah" cityProvince="Bandung, Jawa Barat" />
+      </IonContent>
     </IonPage>
   );
 };
