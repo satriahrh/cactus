@@ -8,11 +8,18 @@ import {
   IonCol,
   IonIcon,
   IonItem,
+  IonLabel,
   IonList,
   IonRow,
   IonText,
 } from "@ionic/react";
-import { ellipsisVertical, locationOutline } from "ionicons/icons";
+import {
+  ellipsisVertical,
+  locationOutline,
+  caretUpOutline,
+  chatbubbleOutline,
+  shareSocialOutline,
+} from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { Thread } from "./DisasterLocationDetail.Types";
 import { DataGetDisaterLocationType } from "./Home.Types";
@@ -133,6 +140,22 @@ const ThreadsListing = ({ dataGetDisasterLocation }: ThreadsListingProps) => {
                   {value.title}
                 </h4>
               </IonText>
+              <IonItem lines="none" className="thread-card-action">
+                <IonButton fill="outline" className="thread-action-upvote">
+                  <IonIcon icon={caretUpOutline} />
+                  <IonLabel>{value.numberOfUpVote}</IonLabel>
+                </IonButton>
+                <IonButton fill="clear">
+                  <IonIcon icon={chatbubbleOutline} />
+                  <IonLabel>
+                    Diskusi <strong>{value.numberOfReply}</strong>
+                  </IonLabel>
+                </IonButton>
+                <IonButton fill="clear" slot="end">
+                  <IonIcon icon={shareSocialOutline} />
+                </IonButton>
+                '
+              </IonItem>
             </IonCardContent>
           </IonCard>
         );

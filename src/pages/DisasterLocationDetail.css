@@ -16,7 +16,16 @@
 }
 
 .thread-location-display,
-.thread-card-header {
+.thread-card-header,
+.thread-card-action {
   --padding-start: 0;
   --inner-padding-start: 0;
+}
+
+.thread-card-action {
+  --padding-top: 16px;
+}
+
+.thread-action-upvote {
+  --border-width: 1px;
 }
