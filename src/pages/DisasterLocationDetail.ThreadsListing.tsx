@@ -62,13 +62,14 @@ const ThreadsListing = ({ dataGetDisasterLocation }: ThreadsListingProps) => {
     <IonList>
       {threadsListingData.data.map((value, index) => {
         return (
-          <IonCard>
+          <IonCard className="thread-card">
             <IonCardHeader
+              className="thread-card-header"
               style={{
                 borderBottom: "solid 0.4px #EAEAEA",
               }}
             >
-              <IonItem lines="none" className="thread-card-header">
+              <IonItem lines="none" className="thread-card-header-content">
                 <IonAvatar
                   slot="start"
                   style={
@@ -118,7 +119,6 @@ const ThreadsListing = ({ dataGetDisasterLocation }: ThreadsListingProps) => {
               </IonItem>
             </IonCardHeader>
             <IonCardContent className="thread-content">
-              <br />
               <IonItem lines="none" className="thread-location-display">
                 <IonIcon icon={locationOutline} />
                 <IonText

@@ -10,13 +10,14 @@
   margin-bottom: 38px;
 }
 
-.thread-card-header {
-  --padding-end: 0;
-  --inner-padding-end: 0;
+.thread-card > ion-card-header {
+  padding-bottom: 8px !important;
+
+  margin-bottom: 8px;
 }
 
 .thread-location-display,
-.thread-card-header,
+.thread-card-header-content,
 .thread-card-action {
   --padding-start: 0;
   --inner-padding-start: 0;
