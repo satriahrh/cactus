@@ -10,3 +10,8 @@ ion-item {
 .alert-info-flood-row {
   min-height: 46px;
 }
+
+.disaster-location-thumbnail {
+  --size: 68px;
+  --border-radius: 4px;
+}
