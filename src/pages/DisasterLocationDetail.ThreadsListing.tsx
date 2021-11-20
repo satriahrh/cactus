@@ -53,6 +53,45 @@ const ThreadsListing = ({ dataGetDisasterLocation }: ThreadsListingProps) => {
             reportState: "unresolved",
             type: "disaster-report",
           },
+          {
+            lastUpdated: "4 minutes",
+            title:
+              "Rumahku kebanjiran 1,5 Meter, butuh bantuan segera. ada bayi dan lansia!!",
+            locationDisplay: "Kalibata, Jakarta Selatan",
+            numberOfReply: 4,
+            numberOfUpVote: 83,
+            authorName: "Dhira Wigata",
+            authorAvatarUrl:
+              "https://i.pinimg.com/280x280_RS/66/be/73/66be73a532c4bcb62f5dcbee1522d809.jpg",
+            reportState: "unresolved",
+            type: "disaster-report",
+          },
+          {
+            lastUpdated: "4 minutes",
+            title:
+              "Rumahku kebanjiran 1,5 Meter, butuh bantuan segera. ada bayi dan lansia!!",
+            locationDisplay: "Kalibata, Jakarta Selatan",
+            numberOfReply: 4,
+            numberOfUpVote: 83,
+            authorName: "Dhira Wigata",
+            authorAvatarUrl:
+              "https://i.pinimg.com/280x280_RS/66/be/73/66be73a532c4bcb62f5dcbee1522d809.jpg",
+            reportState: "unresolved",
+            type: "disaster-report",
+          },
+          {
+            lastUpdated: "4 minutes",
+            title:
+              "Rumahku kebanjiran 1,5 Meter, butuh bantuan segera. ada bayi dan lansia!!",
+            locationDisplay: "Kalibata, Jakarta Selatan",
+            numberOfReply: 4,
+            numberOfUpVote: 83,
+            authorName: "Dhira Wigata",
+            authorAvatarUrl:
+              "https://i.pinimg.com/280x280_RS/66/be/73/66be73a532c4bcb62f5dcbee1522d809.jpg",
+            reportState: "unresolved",
+            type: "disaster-report",
+          },
         ]),
       }));
     }
