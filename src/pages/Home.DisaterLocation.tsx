@@ -15,6 +15,8 @@ import {
 import { DataGetDisaterLocationsType } from "./Home.Types";
 import * as React from "react";
 import "./Home.css";
+import { useHistory } from "react-router";
+import DisasterLocationDetail from "./DisasterLocationDetail";
 
 type DisaterLocationProps = {
   dataGetDisaterLocations: DataGetDisaterLocationsType;
@@ -22,6 +24,7 @@ type DisaterLocationProps = {
 
 const DisasterLocation = React.memo(
   ({ dataGetDisaterLocations }: DisaterLocationProps) => {
+    const history = useHistory();
     console.log(dataGetDisaterLocations);
     return (
       <>
@@ -42,6 +45,11 @@ const DisasterLocation = React.memo(
               style={{
                 display: "flex",
                 flexDirection: "column",
+              }}
+              onClick={() => {
+                history.push("/disaster-location/", {
+                  dataGetDisasterLocation: value,
+                });
               }}
             >
               <IonCardContent>

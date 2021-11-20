@@ -13,7 +13,7 @@ export type DataGetWeatherInfoType = {
   humidity: Number;
 };
 
-type DataGetDisaterLocationType = {
+export type DataGetDisaterLocationType = {
   district: string;
   city: string;
   floodSeverity: string;
