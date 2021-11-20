@@ -11,26 +11,14 @@ import {
 } from "./Home.Types";
 import ReportDisaster from "./Home.ReportDisaster";
 import DisasterLocation from "./Home.DisaterLocation";
+import getPosition from "../services/getPosition";
 
 const Home: React.FC = () => {
-  const [present] = useIonToast();
   const [position, setPosition] = useState<Geoposition>();
 
   useEffect(() => {
-    const getLocation = async () => {
-      try {
-        if (!position) {
-          const currentPosition = await Geolocation.getCurrentPosition();
-          setPosition(currentPosition);
-          console.log(currentPosition);
-        }
-      } catch (error: any) {
-        present(error.message, 3000);
-        console.log("Error getting location", error);
-      }
-    };
-    getLocation();
-  }, [position, setPosition]);
+    getPosition(position, setPosition);
+  }, [setPosition]);
 
   const [dataAlertInfo, setDataAlertInfo] = useState<DataAlertInfoType>();
   useEffect(() => {

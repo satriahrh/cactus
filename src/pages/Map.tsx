@@ -7,9 +7,17 @@ import {
 } from "@ionic/react";
 import GoogleMapReact from "google-map-react";
 import "./Map.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import getPosition from "../services/getPosition";
+import { Geoposition } from "@ionic-native/geolocation";
 
 const Map: React.FC = () => {
+  const [position, setPosition] = useState<Geoposition>();
+
+  useEffect(() => {
+    getPosition(position, setPosition);
+  }, [setPosition]);
+
   return (
     <IonPage>
       <IonHeader>
@@ -18,21 +26,28 @@ const Map: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <GoogleMap />
+        {position && (
+          <GoogleMap
+            defaultCenter={{
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            }}
+          />
+        )}
       </IonContent>
     </IonPage>
   );
 };
 
-const GoogleMap = () => {
-  const [center, setCenter] = useState({ lat: 11.0168, lng: 76.9558 });
-  const [zoom, setZoom] = useState(11);
-
+type GoogleMapProps = {
+  defaultCenter: GoogleMapReact.Coords;
+};
+const GoogleMap = ({ defaultCenter }: GoogleMapProps) => {
   return (
     <GoogleMapReact
       bootstrapURLKeys={{ key: "AIzaSyDwnELJK07FDyl-5je99jyMWTaZjH_EC7g" }}
-      defaultCenter={center}
-      defaultZoom={zoom}
+      defaultCenter={defaultCenter}
+      defaultZoom={12}
     >
       <Marker lat={11.0168} lng={76.9558} />
       <Marker lat={11.0268} lng={76.9558} />
