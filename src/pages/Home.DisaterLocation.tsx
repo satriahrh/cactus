@@ -16,7 +16,6 @@ import { DataGetDisaterLocationsType } from "./Home.Types";
 import * as React from "react";
 import "./Home.css";
 import { useHistory } from "react-router";
-import DisasterLocationDetail from "./DisasterLocationDetail";
 
 type DisaterLocationProps = {
   dataGetDisaterLocations: DataGetDisaterLocationsType;
