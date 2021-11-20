@@ -14,3 +14,9 @@
   --padding-end: 0;
   --inner-padding-end: 0;
 }
+
+.thread-location-display,
+.thread-card-header {
+  --padding-start: 0;
+  --inner-padding-start: 0;
+}

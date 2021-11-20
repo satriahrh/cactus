@@ -12,7 +12,7 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
-import { ellipsisVertical } from "ionicons/icons";
+import { ellipsisVertical, locationOutline } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { Thread } from "./DisasterLocationDetail.Types";
 import { DataGetDisaterLocationType } from "./Home.Types";
@@ -64,17 +64,19 @@ const ThreadsListing = ({ dataGetDisasterLocation }: ThreadsListingProps) => {
               <IonItem lines="none" className="thread-card-header">
                 <IonAvatar
                   slot="start"
-                  style={{
-                    width: "24px",
-                    height: "24px",
-                  }}
+                  style={
+                    {
+                      // width: "24px",
+                      // height: "24px",
+                    }
+                  }
                 >
                   <img src={value.authorAvatarUrl} alt={value.authorName} />
                 </IonAvatar>
                 <IonText>
                   <p
                     style={{
-                      fontSize: "12px",
+                      fontSize: "14px",
                       margin: 0,
                     }}
                   >
@@ -108,7 +110,30 @@ const ThreadsListing = ({ dataGetDisasterLocation }: ThreadsListingProps) => {
                 </IonItem>
               </IonItem>
             </IonCardHeader>
-            <IonCardContent>There</IonCardContent>
+            <IonCardContent className="thread-content">
+              <br />
+              <IonItem lines="none" className="thread-location-display">
+                <IonIcon icon={locationOutline} />
+                <IonText
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                  }}
+                  color="dark"
+                >
+                  <span>{value.locationDisplay}</span>
+                </IonText>
+              </IonItem>
+              <IonText color="dark">
+                <h4
+                  style={{
+                    fontSize: "18px",
+                  }}
+                >
+                  {value.title}
+                </h4>
+              </IonText>
+            </IonCardContent>
           </IonCard>
         );
       })}
