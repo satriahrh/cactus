@@ -42,6 +42,7 @@ const Home: React.FC = () => {
     <IonPage>
       <IonContent fullscreen className="ion-padding">
         {position && <WeatherInfo position={position} />}
+        {position && <ReportDisaster position={position} />}
       </IonContent>
     </IonPage>
   );
@@ -272,6 +273,31 @@ const weatherCopy: Record<string, string> = {
   snow: "Turun Salju",
   "thunderstorm-showers": "Badai Petir",
   "thuderstorm-snow": "Badai Salju",
+};
+
+type ReportDisasterProps = {
+  position: Geoposition;
+};
+
+const ReportDisaster = ({ position }: ReportDisasterProps) => {
+  return (
+    <IonButton
+      color="danger"
+      expand="block"
+      className="report-disaster-button"
+      size="large"
+      disabled
+    >
+      <IonImg src="assets/icon/ant-alert-outlined.svg" slot="start" />
+      <IonText className="ion-text-left ion-text-capitalize">
+        <h2 className="ion-no-margin">
+          Buat Laporan
+          <br />
+          Terdampak Banjir
+        </h2>
+      </IonText>
+    </IonButton>
+  );
 };
 
 export default Home;
