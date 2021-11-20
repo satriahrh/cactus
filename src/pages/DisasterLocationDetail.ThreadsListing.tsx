@@ -186,7 +186,7 @@ const ThreadsListing = ({ dataGetDisasterLocation }: ThreadsListingProps) => {
                 </IonButton>
                 <IonButton fill="clear">
                   <IonIcon icon={chatbubbleOutline} />
-                  <IonLabel>
+                  <IonLabel className="ion-text-capitalize">
                     Diskusi <strong>{value.numberOfReply}</strong>
                   </IonLabel>
                 </IonButton>
