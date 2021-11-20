@@ -2,12 +2,14 @@ import { IonButton, IonImg, IonText } from "@ionic/react";
 // import HorizontalScroll from "react-scroll-horizontal";
 import "./Home.css";
 import { DataAlertInfoType } from "./Home.Types";
+import * as React from "react";
 
 type ReportDisasterProps = {
   dataAlertInfo: DataAlertInfoType;
 };
 
-const ReportDisaster = ({ dataAlertInfo }: ReportDisasterProps) => {
+const ReportDisaster = React.memo(({ dataAlertInfo }: ReportDisasterProps) => {
+  console.log(dataAlertInfo);
   return (
     <IonButton
       color="danger"
@@ -26,6 +28,6 @@ const ReportDisaster = ({ dataAlertInfo }: ReportDisasterProps) => {
       </IonText>
     </IonButton>
   );
-};
+});
 
 export default ReportDisaster;

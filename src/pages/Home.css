@@ -3,8 +3,7 @@ ion-item {
 }
 
 .report-disaster-button {
-  --padding-top: 48px;
-  --padding-bottom: 48px;
+  min-height: 89px;
   --color: var(--color-light);
 }
 
