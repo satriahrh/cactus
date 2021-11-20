@@ -12,7 +12,7 @@ import {
   IonText,
   useIonToast,
 } from "@ionic/react";
-import { notificationsOutline, warning, warningOutline } from "ionicons/icons";
+import { notificationsOutline, alertCircleOutline } from "ionicons/icons";
 import { Geolocation, Geoposition } from "@ionic-native/geolocation";
 // import HorizontalScroll from "react-scroll-horizontal";
 import "./Home.css";
@@ -40,7 +40,7 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
+      <IonContent fullscreen className="ion-padding">
         {position && <WeatherInfo position={position} />}
       </IonContent>
     </IonPage>
@@ -57,7 +57,7 @@ const WeatherInfo = ({ position }: WeatherInfoProps) => {
     city: String;
     province: String;
     date: String;
-    weather: String;
+    weather: string;
     temperature: Number;
     humidity: Number;
   };
@@ -70,7 +70,7 @@ const WeatherInfo = ({ position }: WeatherInfoProps) => {
         city: "Kab. Bandung",
         province: "Jawa Barat",
         date: "Selasa, 16 November",
-        weather: "thuderstorm-shower",
+        weather: "thunderstorm-showers",
         temperature: 31.2,
         humidity: 50,
       });
@@ -78,7 +78,7 @@ const WeatherInfo = ({ position }: WeatherInfoProps) => {
   }, [position, data]);
   return (
     <IonGrid>
-      <IonRow>
+      <IonRow className="ion-no-margin">
         <IonCol>
           <IonText class="ion-padding-start">
             <h1
@@ -89,6 +89,7 @@ const WeatherInfo = ({ position }: WeatherInfoProps) => {
             >
               {data?.district}
             </h1>
+            <br />
             <p
               style={{
                 margin: 0,
@@ -126,10 +127,19 @@ const WeatherInfo = ({ position }: WeatherInfoProps) => {
             justifyContent: "flex-end",
           }}
         >
-          <IonText>
-            <p className="ion-no-margin">Selasa, 16 November</p>
-            <p className="ion-no-margin">
-              <strong>Badai Petir</strong>
+          <IonText
+            style={{
+              fontSize: "14px",
+            }}
+          >
+            <p className="ion-no-margin">{data?.date}</p>
+            <p
+              className="ion-no-margin"
+              style={{
+                marginTop: "8px",
+              }}
+            >
+              <strong>{data?.weather && weatherCopy[data.weather]}</strong>
             </p>
           </IonText>
         </IonCol>
@@ -143,7 +153,7 @@ const WeatherInfo = ({ position }: WeatherInfoProps) => {
             textAlign: "right",
           }}
         >
-          <IonText color="primary">
+          <IonText color="secondary">
             <strong
               style={{
                 fontSize: "22px",
@@ -167,7 +177,7 @@ const WeatherInfo = ({ position }: WeatherInfoProps) => {
             style={{
               maxWidth: "91px",
             }}
-            src={"assets/weather/thunderstorm-showers.svg"}
+            src={"assets/weather/" + data?.weather + ".svg"}
           />
         </IonCol>
       </IonRow>
@@ -184,8 +194,23 @@ const WeatherInfo = ({ position }: WeatherInfoProps) => {
               borderRadius: "5px",
             }}
           >
-            <IonIcon slot="start" icon={warningOutline} />
-            <IonLabel>Perkiraan Banjir pada 19:48</IonLabel>
+            <IonIcon
+              className="warning-banjir"
+              slot="start"
+              icon={alertCircleOutline}
+              size="small"
+              style={{
+                margin: "4px 0",
+              }}
+            />
+            <IonLabel
+              style={{
+                fontSize: "12px",
+                fontWeight: "bold",
+              }}
+            >
+              Perkiraan Banjir pada 19:48 WIB
+            </IonLabel>
           </IonItem>
         </IonCol>
       </IonRow>
@@ -229,6 +254,24 @@ const WeatherInfo = ({ position }: WeatherInfoProps) => {
       </IonRow> */}
     </IonGrid>
   );
+};
+
+const weatherCopy: Record<string, string> = {
+  "clear-day": "Hari Cerah",
+  "clear-night": "Malam Cerah",
+  cloudy: "Berawan",
+  fog: "Berkabut",
+  "heavy-showers": "Hujan Lebat",
+  "heavy-sleet": "Hujan Es Lebat",
+  "heavy-snow": "Salju Lebat",
+  "overcast ": "Mendung",
+  "partly-cloudy-day": "Hari Berawan Sebagian",
+  "partly-cloudy-night": "Malam Berawan Sebagian",
+  showers: "Hujan",
+  sleet: "Hujan Es",
+  snow: "Turun Salju",
+  "thunderstorm-showers": "Badai Petir",
+  "thuderstorm-snow": "Badai Salju",
 };
 
 export default Home;
