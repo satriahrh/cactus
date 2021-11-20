@@ -7,3 +7,7 @@ ion-item {
   --padding-bottom: 48px;
   --color: var(--color-light);
 }
+
+.warning-banjir-row {
+  min-height: 46px;
+}

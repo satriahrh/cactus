@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 const Home: React.FC = () => {
   const [present] = useIonToast();
   const [position, setPosition] = useState<Geoposition>();
+  const [dataAlertInfo, setDataAlertInfo] = useState<DataAlertInfoType>();
 
   useEffect(() => {
     const getLocation = async () => {
@@ -37,12 +38,23 @@ const Home: React.FC = () => {
     };
     getLocation();
   }, [present, position, setPosition]);
+  useEffect(() => {
+    // Get Alert Info by Lat Long
+    if (position) {
+      setDataAlertInfo({
+        when: "12 Nov 2021",
+        willDisaster: true,
+      });
+    }
+  }, [dataAlertInfo, position]);
 
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
-        {position && <WeatherInfo position={position} />}
-        {position && <ReportDisaster position={position} />}
+        {position && dataAlertInfo && (
+          <WeatherInfo position={position} dataAlertInfo={dataAlertInfo} />
+        )}
+        {dataAlertInfo && <ReportDisaster dataAlertInfo={dataAlertInfo} />}
       </IonContent>
     </IonPage>
   );
@@ -50,9 +62,10 @@ const Home: React.FC = () => {
 
 type WeatherInfoProps = {
   position: Geoposition;
+  dataAlertInfo: DataAlertInfoType;
 };
 
-const WeatherInfo = ({ position }: WeatherInfoProps) => {
+const WeatherInfo = ({ position, dataAlertInfo }: WeatherInfoProps) => {
   type DataType = {
     district: String;
     city: String;
@@ -182,8 +195,9 @@ const WeatherInfo = ({ position }: WeatherInfoProps) => {
           />
         </IonCol>
       </IonRow>
-      <IonRow>
+      <IonRow className="warning-banjir-row">
         <IonCol
+          hidden={!dataAlertInfo.willDisaster}
           style={{
             display: "flex",
             justifyContent: "end",
@@ -210,7 +224,7 @@ const WeatherInfo = ({ position }: WeatherInfoProps) => {
                 fontWeight: "bold",
               }}
             >
-              Perkiraan Banjir pada 19:48 WIB
+              Perkiraan Banjir pada {dataAlertInfo.when}
             </IonLabel>
           </IonItem>
         </IonCol>
@@ -275,18 +289,23 @@ const weatherCopy: Record<string, string> = {
   "thuderstorm-snow": "Badai Salju",
 };
 
-type ReportDisasterProps = {
-  position: Geoposition;
+type DataAlertInfoType = {
+  when: string;
+  willDisaster: boolean;
 };
 
-const ReportDisaster = ({ position }: ReportDisasterProps) => {
+type ReportDisasterProps = {
+  dataAlertInfo: DataAlertInfoType;
+};
+
+const ReportDisaster = ({ dataAlertInfo }: ReportDisasterProps) => {
   return (
     <IonButton
       color="danger"
       expand="block"
       className="report-disaster-button"
       size="large"
-      disabled
+      disabled={!dataAlertInfo.willDisaster}
     >
       <IonImg src="assets/icon/ant-alert-outlined.svg" slot="start" />
       <IonText className="ion-text-left ion-text-capitalize">
