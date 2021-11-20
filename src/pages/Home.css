@@ -8,6 +8,6 @@ ion-item {
   --color: var(--color-light);
 }
 
-.warning-banjir-row {
+.alert-info-flood-row {
   min-height: 46px;
 }

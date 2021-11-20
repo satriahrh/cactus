@@ -195,7 +195,7 @@ const WeatherInfo = ({ position, dataAlertInfo }: WeatherInfoProps) => {
           />
         </IonCol>
       </IonRow>
-      <IonRow className="warning-banjir-row">
+      <IonRow className="alert-info-flood-row">
         <IonCol
           hidden={!dataAlertInfo.willDisaster}
           style={{
@@ -210,7 +210,7 @@ const WeatherInfo = ({ position, dataAlertInfo }: WeatherInfoProps) => {
             }}
           >
             <IonIcon
-              className="warning-banjir"
+              className="alert-info-flood"
               slot="start"
               icon={alertCircleOutline}
               size="small"
