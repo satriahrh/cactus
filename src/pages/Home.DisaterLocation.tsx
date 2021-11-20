@@ -1,21 +1,15 @@
 import {
   IonCard,
   IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
   IonCol,
-  IonHeader,
-  IonImg,
-  IonList,
   IonRow,
   IonText,
   IonThumbnail,
 } from "@ionic/react";
-import { DataGetDisaterLocationsType } from "./Home.Types";
 import * as React from "react";
 import "./Home.css";
 import { useHistory } from "react-router";
+import { DataGetDisaterLocationsType } from "../entity/disasterLocation";
 
 type DisaterLocationProps = {
   dataGetDisaterLocations: DataGetDisaterLocationsType;
@@ -32,7 +26,7 @@ const DisasterLocation = React.memo(
             style={{
               fontWeight: "semi-bold",
               fontSize: "14px",
-              margin: "24px 0px 16px 8px",
+              margin: "24px 0px 16px 24px",
             }}
           >
             Kawasan Banjir Saat Ini

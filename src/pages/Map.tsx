@@ -1,28 +1,43 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
+import { IonContent, IonPage } from "@ionic/react";
+import GoogleMapReact from "google-map-react";
 import "./Map.css";
+import { useEffect, useState } from "react";
+import getPosition from "../services/getPosition";
+import { Geoposition } from "@ionic-native/geolocation";
+import GoogleMap from "./Map.GoogleMap";
+import DisasterInformation from "./Map.DisaterInformation";
+import getDisasterLocations from "../services/getDisasterLocations";
+import { DataGetDisaterLocationsType } from "../entity/disasterLocation";
 
 const Map: React.FC = () => {
+  const [position, setPosition] = useState<Geoposition>();
+
+  useEffect(() => {
+    getPosition(position, setPosition);
+  }, [setPosition]);
+
+  const [dataGetDisaterLocations, setDataGetDisasterLocations] =
+    useState<DataGetDisaterLocationsType>();
+  useEffect(() => {
+    getDisasterLocations(position, setDataGetDisasterLocations);
+  }, [position, setDataGetDisasterLocations]);
+
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Peta</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Peta</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Peta page" />
+        {position && (
+          <GoogleMap
+            defaultCenter={{
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            }}
+            dataGetDisaterLocations={dataGetDisaterLocations}
+          />
+        )}
+        <DisasterInformation
+          position={position}
+          dataGetDisaterLocations={dataGetDisaterLocations}
+        />
       </IonContent>
     </IonPage>
   );
