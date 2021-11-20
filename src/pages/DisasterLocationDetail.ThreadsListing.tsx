@@ -22,8 +22,11 @@ import {
 } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { Thread } from "./DisasterLocationDetail.Types";
-import { DataGetDisaterLocationType } from "./Home.Types";
 import "./DisasterLocationDetail.css";
+import {
+  DataGetDisaterLocationsType,
+  DataGetDisaterLocationType,
+} from "../entity/disasterLocation";
 
 type ThreadsListingProps = {
   dataGetDisasterLocation: DataGetDisaterLocationType;

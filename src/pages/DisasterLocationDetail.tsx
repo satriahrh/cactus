@@ -1,10 +1,10 @@
 import { IonContent, IonPage } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { DataGetDisaterLocationType } from "./Home.Types";
 import "./DisasterLocationDetail.css";
 import ThreadsListing from "./DisasterLocationDetail.ThreadsListing";
 import Header from "./DisasterLocationDetail.Header";
+import { DataGetDisaterLocationType } from "../entity/disasterLocation";
 
 // type DisasterLocationDetailProps = {
 //   dataGetDisasterLocation: DataGetDisaterLocationType;

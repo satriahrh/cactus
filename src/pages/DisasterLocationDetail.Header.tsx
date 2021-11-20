@@ -6,7 +6,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { DataGetDisaterLocationType } from "./Home.Types";
+import { DataGetDisaterLocationType } from "../entity/disasterLocation";
 import "./DisasterLocationDetail.css";
 
 type HeaderProps = {
