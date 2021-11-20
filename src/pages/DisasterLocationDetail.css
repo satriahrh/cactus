@@ -1,0 +1,32 @@
+.header {
+  background-image: url("https://disk.mediaindonesia.com/thumbs/1800x1200/news/2020/10/cdb6fae9bdff54319546bb32fdd8edf3.jpg");
+  background-size: cover;
+  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
+    0px 18px 23px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar {
+  --background: none;
+  margin-bottom: 38px;
+}
+
+.thread-card > ion-card-header {
+  padding-bottom: 8px !important;
+
+  margin-bottom: 8px;
+}
+
+.thread-location-display,
+.thread-card-header-content,
+.thread-card-action {
+  --padding-start: 0;
+  --inner-padding-start: 0;
+}
+
+.thread-card-action {
+  --padding-top: 16px;
+}
+
+.thread-action-upvote {
+  --border-width: 1px;
+}

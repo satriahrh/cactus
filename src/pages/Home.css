@@ -1,0 +1,17 @@
+ion-item {
+  --min-height: 32px;
+}
+
+.report-disaster-button {
+  min-height: 89px;
+  --color: var(--color-light);
+}
+
+.alert-info-flood-row {
+  min-height: 46px;
+}
+
+.disaster-location-thumbnail {
+  --size: 68px;
+  --border-radius: 4px;
+}

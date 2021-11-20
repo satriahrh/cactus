@@ -38,46 +38,57 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import DisasterLocationDetail from "./pages/DisasterLocationDetail";
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/map">
-            <Map />
-          </Route>
-          <Route path="/forum">
-            <Forum />
-          </Route>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/">
-            <IonIcon icon={homeOutline} />
-            <IonLabel>Beranda</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="map" href="/map">
-            <IonIcon icon={mapOutline} />
-            <IonLabel>Peta</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="forum" href="/forum">
-            <IonIcon icon={chatboxOutline} />
-            <IonLabel>Forum</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="profile" href="/profile">
-            <IonIcon icon={personOutline} />
-            <IonLabel>Profil</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+      <IonRouterOutlet>
+        <Route exact path="/">
+          <Redirect to="/t/home" />
+        </Route>
+        <Route path="/t" component={PageTabs} />
+        <Route path="/disaster-location/" component={DisasterLocationDetail} />
+      </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
+);
+
+const PageTabs: React.FC = () => (
+  <IonTabs>
+    <IonRouterOutlet>
+      <Route exact path="/t/home">
+        <Home />
+      </Route>
+      <Route exact path="/t/map">
+        <Map />
+      </Route>
+      <Route path="/t/forum">
+        <Forum />
+      </Route>
+      <Route exact path="/t/profile">
+        <Profile />
+      </Route>
+    </IonRouterOutlet>
+    <IonTabBar slot="bottom">
+      <IonTabButton tab="home" href="/t/home">
+        <IonIcon icon={homeOutline} />
+        <IonLabel>Beranda</IonLabel>
+      </IonTabButton>
+      <IonTabButton tab="map" href="/t/map">
+        <IonIcon icon={mapOutline} />
+        <IonLabel>Peta</IonLabel>
+      </IonTabButton>
+      <IonTabButton tab="forum" href="/t/forum">
+        <IonIcon icon={chatboxOutline} />
+        <IonLabel>Forum</IonLabel>
+      </IonTabButton>
+      <IonTabButton tab="profile" href="/t/profile">
+        <IonIcon icon={personOutline} />
+        <IonLabel>Profil</IonLabel>
+      </IonTabButton>
+    </IonTabBar>
+  </IonTabs>
 );
 
 export default App;
