@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { DataGetDisaterLocationType } from "./Home.Types";
 import "./DisasterLocationDetail.css";
+import ThreadsListing from "./DisasterLocationDetail.ThreadsListing";
 
 // type DisasterLocationDetailProps = {
 //   dataGetDisasterLocation: DataGetDisaterLocationType;
@@ -36,7 +37,11 @@ const DisasterLocationDetail = () => {
       {dataGetDisasterLocation && (
         <Header dataGetDisasterLocation={dataGetDisasterLocation} />
       )}
-      <IonContent></IonContent>
+      <IonContent>
+        {dataGetDisasterLocation && (
+          <ThreadsListing dataGetDisasterLocation={dataGetDisasterLocation} />
+        )}
+      </IonContent>
     </IonPage>
   );
 };

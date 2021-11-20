@@ -9,3 +9,8 @@
   --background: none;
   margin-bottom: 38px;
 }
+
+.thread-card-header {
+  --padding-end: 0;
+  --inner-padding-end: 0;
+}
