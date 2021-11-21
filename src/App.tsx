@@ -41,6 +41,8 @@ import "./theme/variables.css";
 import DisasterLocationDetail from "./pages/DisasterLocationDetail";
 import ThreadDetail from "./pages/ThreadDetail";
 import ThreadCreationPage from "./pages/ThreadCreation";
+import ProfileSettingsPage from "./pages/ProfileSettings";
+import LoginPage from "./pages/Login";
 
 const App: React.FC = () => (
   <IonApp>
@@ -53,6 +55,8 @@ const App: React.FC = () => (
         <Route path="/disaster-location/" component={DisasterLocationDetail} />
         <Route path="/thread-detail/:id" component={ThreadDetail} />
         <Route path="/thread-creation" component={ThreadCreationPage} />
+        <Route exact path="/profile/settings" component={ProfileSettingsPage} />
+        <Route exact path="/profile/login" component={LoginPage} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

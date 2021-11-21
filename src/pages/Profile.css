@@ -1,0 +1,23 @@
+.user-info {
+  --padding-top: 24px;
+  --padding-start: 32px;
+  --inner-padding-end: 0;
+  --padding-end: 32px;
+}
+
+.disaster-pack-card {
+  background-image: url("https://storage.googleapis.com/boram/disaster-pack-ilus.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.benefit-thumbnail {
+  padding: 8px;
+}
+
+.benefit-card {
+  border-radius: 8px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ececec;
+}

@@ -136,15 +136,7 @@ const ThreadSummaryComponent: React.FC<ThreadSummaryProps> = ({ data }) => {
         }}
       >
         <IonItem lines="none" className="thread-card-header-content">
-          <IonAvatar
-            slot="start"
-            style={
-              {
-                // width: "24px",
-                // height: "24px",
-              }
-            }
-          >
+          <IonAvatar slot="start">
             <img src={data.authorAvatarUrl} alt={data.authorName} />
           </IonAvatar>
           <IonText>
