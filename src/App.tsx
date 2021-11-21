@@ -1,4 +1,4 @@
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, RouteProps } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
@@ -43,24 +43,37 @@ import ThreadDetail from "./pages/ThreadDetail";
 import ThreadCreationPage from "./pages/ThreadCreation";
 import ProfileSettingsPage from "./pages/ProfileSettings";
 import LoginPage from "./pages/Login";
+import { AuthContext, AuthProvider } from "./services/auth";
+import { useContext } from "react";
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/">
-          <Redirect to="/t/home" />
-        </Route>
-        <Route path="/t" component={PageTabs} />
-        <Route path="/disaster-location/" component={DisasterLocationDetail} />
-        <Route path="/thread-detail/:id" component={ThreadDetail} />
-        <Route path="/thread-creation" component={ThreadCreationPage} />
-        <Route exact path="/profile/settings" component={ProfileSettingsPage} />
-        <Route exact path="/profile/login" component={LoginPage} />
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  return (
+    <IonApp>
+      <AuthProvider>
+        <IonReactRouter>
+          <IonRouterOutlet>
+            <Route exact path="/">
+              <Redirect to="/t/home" />
+            </Route>
+            <Route path="/t" component={PageTabs} />
+            <Route
+              path="/disaster-location/"
+              component={DisasterLocationDetail}
+            />
+            <Route path="/thread-detail/:id" component={ThreadDetail} />
+            <PrivateRoute exact path="/thread-creation">
+              <ThreadCreationPage />
+            </PrivateRoute>
+            <PrivateRoute exact path="/profile/settings">
+              <ProfileSettingsPage />
+            </PrivateRoute>
+            <Route exact path="/profile/login" component={LoginPage} />
+          </IonRouterOutlet>
+        </IonReactRouter>
+      </AuthProvider>
+    </IonApp>
+  );
+};
 
 const PageTabs: React.FC = () => (
   <IonTabs>
@@ -98,5 +111,24 @@ const PageTabs: React.FC = () => (
     </IonTabBar>
   </IonTabs>
 );
+
+const PrivateRoute: React.FC<RouteProps> = (props) => {
+  const { data } = useContext(AuthContext);
+  console.log(data);
+  return (
+    <Route {...props}>
+      {data ? (
+        props.children
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/profile/login",
+            state: { from: props.location },
+          }}
+        />
+      )}
+    </Route>
+  );
+};
 
 export default App;

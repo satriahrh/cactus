@@ -17,8 +17,14 @@ import {
   notificationsOutline,
   peopleOutline,
 } from "ionicons/icons";
+import { useContext } from "react";
+import { useHistory } from "react-router";
+import { AuthContext } from "../services/auth";
 
 const ProfileSettingsPage: React.FC = () => {
+  const { logout } = useContext(AuthContext);
+  const history = useHistory();
+
   return (
     <IonPage>
       <IonHeader>
@@ -41,7 +47,15 @@ const ProfileSettingsPage: React.FC = () => {
             <IonLabel>Hubungi Kami</IonLabel>
             <IonIcon icon={chevronForwardOutline} slot="end" color="dark" />
           </IonItem>
-          <IonItem lines="none" button className="ion-margin-top">
+          <IonItem
+            lines="none"
+            button
+            className="ion-margin-top"
+            onClick={() => {
+              history.push("/");
+              logout();
+            }}
+          >
             <IonIcon icon={logOutOutline} slot="start" color="dark" />
             <IonLabel>Log Out</IonLabel>
             <IonIcon icon={chevronForwardOutline} slot="end" color="dark" />

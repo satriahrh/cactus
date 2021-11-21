@@ -6,10 +6,22 @@ import {
   IonText,
   IonTitle,
 } from "@ionic/react";
-import { GoogleLogin } from "react-google-login";
+import { useContext } from "react";
+import {
+  GoogleLogin,
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+} from "react-google-login";
+import { useHistory, useLocation } from "react-router";
+import { AuthContext } from "../services/auth";
 import "./Login.css";
 
 const LoginPage: React.FC = () => {
+  const { login } = useContext(AuthContext);
+  const location = useLocation<{
+    from: Location;
+  }>();
+  const history = useHistory();
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -28,8 +40,23 @@ const LoginPage: React.FC = () => {
           className="google-login-button"
           clientId="933164749210-eerihlo632nv9r76drahbr5gioj0sfl1.apps.googleusercontent.com"
           buttonText="Login Dengan Google"
-          onSuccess={(res) => {
-            console.log(res);
+          onSuccess={(
+            res: GoogleLoginResponse | GoogleLoginResponseOffline
+          ) => {
+            if ("tokenId" in res) {
+              login(res.tokenId, (error: any) => {
+                if (!error) {
+                  console.log("mantap");
+                  if (location.state?.from) {
+                    history.push(location.state.from.pathname);
+                  } else {
+                    history.push("/");
+                  }
+                } else {
+                  console.log(error);
+                }
+              });
+            }
           }}
           onFailure={(res) => {
             console.log(res);
