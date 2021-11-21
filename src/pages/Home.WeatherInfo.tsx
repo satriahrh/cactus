@@ -10,158 +10,166 @@ import {
   IonText,
 } from "@ionic/react";
 import { notificationsOutline, alertCircleOutline } from "ionicons/icons";
+import { GetWeatherCurrentResponse } from "../services/getWeatherCurrent";
 import "./Home.css";
 import { DataAlertInfoType, DataGetWeatherInfoType } from "./Home.Types";
-import * as React from "react";
 
 type WeatherInfoProps = {
-  dataGetWeatherInfo: DataGetWeatherInfoType;
+  dataGetWeatherCurrent: GetWeatherCurrentResponse;
   dataAlertInfo: DataAlertInfoType;
 };
 
-const WeatherInfo = React.memo(
-  ({ dataGetWeatherInfo, dataAlertInfo }: WeatherInfoProps) => {
-    console.log(dataGetWeatherInfo);
-    return (
-      <IonGrid>
-        <IonRow className="ion-no-margin">
-          <IonCol>
-            <IonText class="ion-padding-start">
-              <h1
-                style={{
-                  fontWeight: "semibold",
-                  margin: 0,
-                }}
-              >
-                {dataGetWeatherInfo.district}
-              </h1>
-              <br />
-              <p
-                style={{
-                  margin: 0,
-                }}
-              >
-                {dataGetWeatherInfo.city}, {dataGetWeatherInfo.province}
-              </p>
-            </IonText>
-          </IonCol>
-          <IonCol className="ion-text-right">
-            <IonButton
-              shape="round"
-              fill="clear"
-              size="large"
+const WeatherInfo = ({
+  dataGetWeatherCurrent,
+  dataAlertInfo,
+}: WeatherInfoProps) => {
+  return (
+    <IonGrid>
+      <IonRow className="ion-no-margin">
+        <IonCol>
+          <IonText class="ion-padding-start">
+            <h1
               style={{
-                textAlign: "top",
+                fontWeight: "semibold",
+                margin: 0,
               }}
             >
-              <IonIcon
-                color="dark"
-                icon={notificationsOutline}
-                style={{
-                  innerHeight: "31px",
-                }}
-              />
-            </IonButton>
-          </IonCol>
-        </IonRow>
-        <IonRow>
-          <IonCol
-            size="6"
+              {dataGetWeatherCurrent.data.location_address.split(",")[0]}
+            </h1>
+            <br />
+            <p
+              style={{
+                margin: 0,
+              }}
+            >
+              {dataGetWeatherCurrent.data.location_city},{" "}
+              {dataGetWeatherCurrent.data.location_state}
+            </p>
+          </IonText>
+        </IonCol>
+        <IonCol className="ion-text-right">
+          <IonButton
+            shape="round"
+            fill="clear"
+            size="large"
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-end",
+              textAlign: "top",
             }}
           >
-            <IonText
+            <IonIcon
+              color="dark"
+              icon={notificationsOutline}
+              style={{
+                innerHeight: "31px",
+              }}
+            />
+          </IonButton>
+        </IonCol>
+      </IonRow>
+      <IonRow>
+        <IonCol
+          size="6"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+          }}
+        >
+          <IonText
+            style={{
+              fontSize: "14px",
+            }}
+          >
+            <p className="ion-no-margin">
+              {dataGetWeatherCurrent.data.datetime}
+            </p>
+            <p
+              className="ion-no-margin"
+              style={{
+                marginTop: "8px",
+              }}
+            >
+              <strong>{dataGetWeatherCurrent.data.weather_main}</strong>
+            </p>
+          </IonText>
+        </IonCol>
+        <IonCol
+          size="3"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignContent: "flex-end",
+            justifyContent: "center",
+            textAlign: "right",
+          }}
+        >
+          <IonText color="secondary">
+            <strong
+              style={{
+                fontSize: "22px",
+              }}
+            >
+              19<sup>o</sup>C
+            </strong>
+          </IonText>
+          <IonText>
+            <strong
               style={{
                 fontSize: "14px",
               }}
             >
-              <p className="ion-no-margin">{dataGetWeatherInfo.date}</p>
-              <p
-                className="ion-no-margin"
-                style={{
-                  marginTop: "8px",
-                }}
-              >
-                <strong>{weatherCopy[dataGetWeatherInfo.weather]}</strong>
-              </p>
-            </IonText>
-          </IonCol>
-          <IonCol
-            size="3"
+              50%
+            </strong>
+          </IonText>
+        </IonCol>
+        <IonCol size="3">
+          <IonImg
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignContent: "flex-end",
-              justifyContent: "center",
-              textAlign: "right",
+              maxWidth: "91px",
+            }}
+            src={
+              "https://openweathermap.org/img/wn/" +
+              dataGetWeatherCurrent.data.weather_icon +
+              "@2x.png"
+            }
+          />
+        </IonCol>
+      </IonRow>
+      <IonRow className="alert-info-flood-row">
+        <IonCol
+          hidden={!dataAlertInfo.willDisaster}
+          style={{
+            display: "flex",
+            justifyContent: "end",
+          }}
+        >
+          <IonItem
+            color="warning"
+            style={{
+              borderRadius: "5px",
             }}
           >
-            <IonText color="secondary">
-              <strong
-                style={{
-                  fontSize: "22px",
-                }}
-              >
-                19<sup>o</sup>C
-              </strong>
-            </IonText>
-            <IonText>
-              <strong
-                style={{
-                  fontSize: "14px",
-                }}
-              >
-                50%
-              </strong>
-            </IonText>
-          </IonCol>
-          <IonCol size="3">
-            <IonImg
+            <IonIcon
+              className="alert-info-flood"
+              slot="start"
+              icon={alertCircleOutline}
+              size="small"
               style={{
-                maxWidth: "91px",
+                margin: "4px 0",
               }}
-              src={"assets/weather/" + dataGetWeatherInfo?.weather + ".svg"}
             />
-          </IonCol>
-        </IonRow>
-        <IonRow className="alert-info-flood-row">
-          <IonCol
-            hidden={!dataAlertInfo.willDisaster}
-            style={{
-              display: "flex",
-              justifyContent: "end",
-            }}
-          >
-            <IonItem
-              color="warning"
+            <IonLabel
               style={{
-                borderRadius: "5px",
+                fontSize: "12px",
+                fontWeight: "bold",
               }}
             >
-              <IonIcon
-                className="alert-info-flood"
-                slot="start"
-                icon={alertCircleOutline}
-                size="small"
-                style={{
-                  margin: "4px 0",
-                }}
-              />
-              <IonLabel
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "bold",
-                }}
-              >
-                Perkiraan Banjir pada {dataAlertInfo.when}
-              </IonLabel>
-            </IonItem>
-          </IonCol>
-        </IonRow>
-        {/* <IonRow
+              Perkiraan Banjir pada {dataAlertInfo.when}
+            </IonLabel>
+          </IonItem>
+        </IonCol>
+      </IonRow>
+      {/* <IonRow
         style={{
           display: "block",
           overflowY: "auto",
@@ -199,11 +207,9 @@ const WeatherInfo = React.memo(
           );
         })}
       </IonRow> */}
-      </IonGrid>
-    );
-  }
-);
-
+    </IonGrid>
+  );
+};
 const weatherCopy: Record<string, string> = {
   "clear-day": "Hari Cerah",
   "clear-night": "Malam Cerah",

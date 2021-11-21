@@ -10,6 +10,10 @@ import DisasterLocation from "./Home.DisaterLocation";
 import getPosition from "../services/getPosition";
 import getDisasterLocations from "../services/getDisasterLocations";
 import { DataGetDisaterLocationsType } from "../entity/disasterLocation";
+import {
+  getWeatherCurrent,
+  GetWeatherCurrentResponse,
+} from "../services/getWeatherCurrent";
 
 const Home: React.FC = () => {
   const [position, setPosition] = useState<Geoposition>();
@@ -29,21 +33,19 @@ const Home: React.FC = () => {
     }
   }, [position]);
 
-  const [dataGetWeatherInfo, setDataGetWeatherInfo] =
-    useState<DataGetWeatherInfoType>();
+  const [dataGetWeatherCurrent, setDataGetWeatherCurrent] =
+    useState<GetWeatherCurrentResponse>();
   useEffect(() => {
-    if (position && !dataGetWeatherInfo) {
-      setDataGetWeatherInfo({
-        district: "Baleendah" + position.coords.latitude,
-        city: "Kab. Bandung",
-        province: "Jawa Barat",
-        date: "Selasa, 16 November",
-        weather: "thunderstorm-showers",
-        temperature: 31.2,
-        humidity: 50,
+    if (position) {
+      getWeatherCurrent(
+        position.coords.latitude,
+        position.coords.longitude
+      ).then((value) => {
+        console.log(value);
+        setDataGetWeatherCurrent(value);
       });
     }
-  }, [position, setDataGetWeatherInfo]);
+  }, [position, setDataGetWeatherCurrent]);
 
   const [dataGetDisaterLocations, setDataGetDisasterLocations] =
     useState<DataGetDisaterLocationsType>();
@@ -54,9 +56,9 @@ const Home: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
-        {dataGetWeatherInfo && dataAlertInfo && (
+        {dataGetWeatherCurrent && dataAlertInfo && (
           <WeatherInfo
-            dataGetWeatherInfo={dataGetWeatherInfo}
+            dataGetWeatherCurrent={dataGetWeatherCurrent}
             dataAlertInfo={dataAlertInfo}
           />
         )}
