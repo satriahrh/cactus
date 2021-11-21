@@ -1,10 +1,5 @@
 import { createContext, useState } from "react";
-
-interface DataResponse {
-  status: number;
-  message: string;
-  error: any;
-}
+import { DataResponse } from "./backend";
 
 interface LoginResponse extends DataResponse {
   data: {
@@ -17,7 +12,7 @@ interface LoginResponse extends DataResponse {
   };
 }
 
-export interface authData {
+export interface AuthData {
   userId: number;
   name: string;
   displayPicture: string;
@@ -25,20 +20,20 @@ export interface authData {
 }
 
 interface IAuthContext {
-  data: authData | undefined;
+  auth: AuthData | undefined;
   login: (googleToken: string, callback: (error: any) => void) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<IAuthContext>({
-  data: undefined,
+  auth: undefined,
   login: () => {},
   logout: () => {},
 });
 const { Provider } = AuthContext;
 
 const AuthProvider: React.FC<{}> = (props) => {
-  const [authState, setAuthState] = useState<authData>();
+  const [authState, setAuthState] = useState<AuthData>();
   const setAuthInfo = (googleToken: string, callback: (error: any) => void) => {
     var axios = require("axios");
     var data = JSON.stringify({
@@ -78,7 +73,7 @@ const AuthProvider: React.FC<{}> = (props) => {
   return (
     <Provider
       value={{
-        data: authState,
+        auth: authState,
         login: (googleToken: string, callback: (error: any) => void) =>
           setAuthInfo(googleToken, callback),
         logout: () => {

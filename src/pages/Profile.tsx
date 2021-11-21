@@ -19,52 +19,69 @@ import {
   IonThumbnail,
 } from "@ionic/react";
 import { settingsOutline } from "ionicons/icons";
+import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { AuthContext } from "../services/auth";
+import { getProfile, GetProfileResponse } from "../services/getProfile";
 import "./Profile.css";
 
 const Profile: React.FC = () => {
   const history = useHistory();
+  const { auth } = useContext(AuthContext);
+
+  const [dataProfile, setDataProfile] = useState<GetProfileResponse>();
+  useEffect(() => {
+    if (auth) {
+      getProfile(auth.token).then((value) => {
+        console.log(value);
+        setDataProfile(value);
+      });
+    }
+  }, [auth, setDataProfile]);
   return (
     <IonPage>
       <IonContent fullscreen>
         <IonList>
-          <IonItem lines="none" className="user-info">
-            <IonAvatar slot="start">
-              <img
-                src="https://i.pinimg.com/280x280_RS/66/be/73/66be73a532c4bcb62f5dcbee1522d809.jpg"
-                alt="Dhira Wigata Putra"
-              />
-            </IonAvatar>
-            <IonText color="dark">
-              <p
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "18px",
-                  margin: 0,
+          {dataProfile && (
+            <IonItem lines="none" className="user-info">
+              <IonAvatar slot="start">
+                <img
+                  src={dataProfile?.data.display_picture}
+                  alt={dataProfile?.data.full_name}
+                />
+              </IonAvatar>
+              <IonText color="dark">
+                <p
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: "18px",
+                    margin: 0,
+                  }}
+                >
+                  {dataProfile?.data.full_name}
+                </p>
+                <p
+                  style={{
+                    fontSize: "14px",
+                    margin: 0,
+                  }}
+                >
+                  Kali Anggrek, Tangerang
+                </p>
+              </IonText>
+              <IonButton
+                slot="end"
+                fill="clear"
+                color="dark"
+                onClick={() => {
+                  history.push("/profile/settings");
                 }}
               >
-                Dhira Wigata Putra
-              </p>
-              <p
-                style={{
-                  fontSize: "14px",
-                  margin: 0,
-                }}
-              >
-                Kali Anggrek, Tangerang
-              </p>
-            </IonText>
-            <IonButton
-              slot="end"
-              fill="clear"
-              color="dark"
-              onClick={() => {
-                history.push("/profile/settings");
-              }}
-            >
-              <IonIcon slot="icon-only" icon={settingsOutline} />
-            </IonButton>
-          </IonItem>
+                <IonIcon slot="icon-only" icon={settingsOutline} />
+              </IonButton>
+            </IonItem>
+          )}
+
           <IonItem lines="none">
             <IonCard className="disaster-pack-card">
               <IonCardHeader>

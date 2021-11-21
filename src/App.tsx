@@ -113,11 +113,11 @@ const PageTabs: React.FC = () => (
 );
 
 const PrivateRoute: React.FC<RouteProps> = (props) => {
-  const { data } = useContext(AuthContext);
-  console.log(data);
+  const { auth } = useContext(AuthContext);
+
   return (
     <Route {...props}>
-      {data ? (
+      {auth ? (
         props.children
       ) : (
         <Redirect
