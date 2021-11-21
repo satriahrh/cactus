@@ -10,10 +10,13 @@ import {
   IonContent,
   IonIcon,
   IonItem,
+  IonItemDivider,
+  IonItemGroup,
   IonLabel,
   IonList,
   IonPage,
   IonText,
+  IonThumbnail,
 } from "@ionic/react";
 import { settingsOutline } from "ionicons/icons";
 import "./Profile.css";
@@ -55,7 +58,6 @@ const Profile: React.FC = () => {
           </IonItem>
           <IonItem lines="none">
             <IonCard className="disaster-pack-card">
-              {/* <img src="/assets/disaster-pack-ilus.jpeg" width="100%" /> */}
               <IonCardHeader>
                 <IonCardTitle
                   color="light"
@@ -89,6 +91,70 @@ const Profile: React.FC = () => {
               </IonCardContent>
             </IonCard>
           </IonItem>
+
+          <IonItemGroup>
+            <IonItemDivider style={{ border: "none" }}>
+              <IonLabel
+                className="ion-padding"
+                color="dark"
+                style={{
+                  fontSize: "14px",
+                  fontWeight: "bold",
+                }}
+              >
+                Mengapa Kamu Perlu Disaster Pack?
+              </IonLabel>
+            </IonItemDivider>
+            {[
+              {
+                title: "Pertolongan Pertama Lengkap",
+                description:
+                  "Tidak lagi khawatir makan dan istirahat, paket pertolongan lengkap selalu siap",
+                ilustrationUrl:
+                  "https://storage.googleapis.com/boram/survival-kit%201.png",
+              },
+              {
+                title: "Transportasi Darurat",
+                description:
+                  "Selamatkan diri dan barangmu dari banjir dengan transportasi dari kami.",
+                ilustrationUrl:
+                  "https://storage.googleapis.com/boram/boat%201.png",
+              },
+              {
+                title: "Penyelamatan Prioritas",
+                description:
+                  "Kamu akan mendapatkan proritas penjemputan dan rumah perlindungan.",
+                ilustrationUrl:
+                  "https://storage.googleapis.com/boram/premium%201.png",
+              },
+            ].map((value, index) => (
+              <IonItem lines="none" className="ion-margin benefit-card">
+                <IonThumbnail
+                  slot="start"
+                  className="benefit-thumbnail benefit-card"
+                >
+                  <img src={value.ilustrationUrl} />
+                </IonThumbnail>
+                <IonText>
+                  <h4
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {value.title}
+                  </h4>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                    }}
+                  >
+                    {value.description}
+                  </p>
+                </IonText>
+              </IonItem>
+            ))}
+          </IonItemGroup>
         </IonList>
       </IonContent>
     </IonPage>
