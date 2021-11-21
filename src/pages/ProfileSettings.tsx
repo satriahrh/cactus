@@ -29,19 +29,19 @@ const ProfileSettingsPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonList>
+        <IonList inset>
           <IonListHeader>Dhira Wigata Putra</IonListHeader>
-          <IonItem lines="none" button>
+          <IonItem lines="none" button className="ion-margin-top">
             <IonIcon icon={notificationsOutline} slot="start" color="dark" />
             <IonLabel>Notifikasi</IonLabel>
             <IonIcon icon={chevronForwardOutline} slot="end" color="dark" />
           </IonItem>
-          <IonItem lines="none" button>
+          <IonItem lines="none" button className="ion-margin-top">
             <IonIcon icon={peopleOutline} slot="start" color="dark" />
             <IonLabel>Hubungi Kami</IonLabel>
             <IonIcon icon={chevronForwardOutline} slot="end" color="dark" />
           </IonItem>
-          <IonItem lines="none" button>
+          <IonItem lines="none" button className="ion-margin-top">
             <IonIcon icon={logOutOutline} slot="start" color="dark" />
             <IonLabel>Log Out</IonLabel>
             <IonIcon icon={chevronForwardOutline} slot="end" color="dark" />
