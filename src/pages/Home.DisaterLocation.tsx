@@ -32,9 +32,10 @@ const DisasterLocation = React.memo(
             Kawasan Banjir Saat Ini
           </h3>
         </IonText>
-        {dataGetDisaterLocations?.map((value, index) => {
+        {dataGetDisaterLocations?.map((value) => {
           return (
             <IonCard
+              key={value.district + "-" + value.city}
               style={{
                 display: "flex",
                 flexDirection: "column",

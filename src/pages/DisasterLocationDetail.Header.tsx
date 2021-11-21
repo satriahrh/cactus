@@ -18,7 +18,7 @@ const Header = ({ dataGetDisasterLocation }: HeaderProps) => {
     <IonHeader className="header">
       <IonToolbar className="toolbar">
         <IonButtons slot="start">
-          <IonBackButton color="light" />
+          <IonBackButton color="light" defaultHref="/" />
         </IonButtons>
       </IonToolbar>
       <IonTitle

@@ -1,0 +1,28 @@
+.thread-detail-content {
+  padding-top: 16px;
+}
+
+.thread-reply > ion-card-header {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+.thread-card-header-content,
+.thread-card-action {
+  --padding-start: 0;
+  --inner-padding-start: 0;
+  --inner-padding-end: 0;
+  --margin-end: 0;
+}
+
+.thread-reply-action {
+  --padding-top: 8px;
+}
+
+.thread-reply-header-content,
+.thread-reply-action {
+  --background: none;
+}
+
+.the-reply > textarea {
+}
