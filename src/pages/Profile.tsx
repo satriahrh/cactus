@@ -19,9 +19,11 @@ import {
   IonThumbnail,
 } from "@ionic/react";
 import { settingsOutline } from "ionicons/icons";
+import { useHistory } from "react-router";
 import "./Profile.css";
 
 const Profile: React.FC = () => {
+  const history = useHistory();
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -52,7 +54,14 @@ const Profile: React.FC = () => {
                 Kali Anggrek, Tangerang
               </p>
             </IonText>
-            <IonButton slot="end" fill="clear" color="dark">
+            <IonButton
+              slot="end"
+              fill="clear"
+              color="dark"
+              onClick={() => {
+                history.push("/profile/settings");
+              }}
+            >
               <IonIcon slot="icon-only" icon={settingsOutline} />
             </IonButton>
           </IonItem>
