@@ -40,6 +40,7 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import DisasterLocationDetail from "./pages/DisasterLocationDetail";
 import ThreadDetail from "./pages/ThreadDetail";
+import ThreadCreationPage from "./pages/ThreadCreation";
 
 const App: React.FC = () => (
   <IonApp>
@@ -51,6 +52,7 @@ const App: React.FC = () => (
         <Route path="/t" component={PageTabs} />
         <Route path="/disaster-location/" component={DisasterLocationDetail} />
         <Route path="/thread-detail/:id" component={ThreadDetail} />
+        <Route path="/thread-creation" component={ThreadCreationPage} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

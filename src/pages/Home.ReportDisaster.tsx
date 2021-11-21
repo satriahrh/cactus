@@ -2,14 +2,19 @@ import { IonButton, IonImg, IonText } from "@ionic/react";
 // import HorizontalScroll from "react-scroll-horizontal";
 import "./Home.css";
 import { DataAlertInfoType } from "./Home.Types";
-import * as React from "react";
+import { useHistory } from "react-router";
+import { Geoposition } from "@ionic-native/geolocation";
 
 type ReportDisasterProps = {
   dataAlertInfo: DataAlertInfoType;
+  position: Geoposition;
 };
 
-const ReportDisaster = React.memo(({ dataAlertInfo }: ReportDisasterProps) => {
-  console.log(dataAlertInfo);
+const ReportDisaster: React.FC<ReportDisasterProps> = ({
+  dataAlertInfo,
+  position,
+}) => {
+  const history = useHistory();
   return (
     <IonButton
       color="danger"
@@ -17,6 +22,15 @@ const ReportDisaster = React.memo(({ dataAlertInfo }: ReportDisasterProps) => {
       className="report-disaster-button"
       size="large"
       disabled={!dataAlertInfo.willDisaster}
+      onClick={() => {
+        history.push("/thread-creation", {
+          type: "report",
+          position: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          },
+        });
+      }}
     >
       <IonImg src="assets/icon/ant-alert-outlined.svg" slot="start" />
       <IonText className="ion-text-left ion-text-capitalize">
@@ -28,6 +42,6 @@ const ReportDisaster = React.memo(({ dataAlertInfo }: ReportDisasterProps) => {
       </IonText>
     </IonButton>
   );
-});
+};
 
 export default ReportDisaster;
