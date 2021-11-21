@@ -1,0 +1,29 @@
+.tulisan {
+  margin: 16px 32px;
+}
+
+.title {
+  margin-top: 32px;
+  padding-inline-end: 0;
+  padding-inline-start: 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.description {
+  margin-top: 32px;
+
+  font-size: 14px;
+}
+
+ion-footer {
+  border: none;
+}
+
+.google-login-button {
+  display: flex !important;
+  width: 85vw;
+  justify-content: center;
+  margin: 24px auto;
+  position: relative;
+}
