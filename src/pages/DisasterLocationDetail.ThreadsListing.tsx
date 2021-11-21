@@ -21,12 +21,10 @@ import {
   shareSocialOutline,
 } from "ionicons/icons";
 import { useEffect, useState } from "react";
-import { Thread } from "./DisasterLocationDetail.Types";
 import "./DisasterLocationDetail.css";
-import {
-  DataGetDisaterLocationsType,
-  DataGetDisaterLocationType,
-} from "../entity/disasterLocation";
+import { DataGetDisaterLocationType } from "../entity/disasterLocation";
+import { useHistory } from "react-router";
+import { ThreadSummary } from "../entity/thread";
 
 type ThreadsListingProps = {
   dataGetDisasterLocation: DataGetDisaterLocationType;
@@ -44,6 +42,7 @@ const ThreadsListing = ({ dataGetDisasterLocation }: ThreadsListingProps) => {
         isLoading: false,
         data: prevState.data.concat([
           {
+            id: 1,
             lastUpdated: "4 minutes",
             title:
               "Rumahku kebanjiran 1,5 Meter, butuh bantuan segera. ada bayi dan lansia!!",
@@ -57,6 +56,7 @@ const ThreadsListing = ({ dataGetDisasterLocation }: ThreadsListingProps) => {
             type: "disaster-report",
           },
           {
+            id: 2,
             lastUpdated: "4 minutes",
             title:
               "Rumahku kebanjiran 1,5 Meter, butuh bantuan segera. ada bayi dan lansia!!",
@@ -70,6 +70,7 @@ const ThreadsListing = ({ dataGetDisasterLocation }: ThreadsListingProps) => {
             type: "disaster-report",
           },
           {
+            id: 3,
             lastUpdated: "4 minutes",
             title:
               "Rumahku kebanjiran 1,5 Meter, butuh bantuan segera. ada bayi dan lansia!!",
@@ -83,6 +84,7 @@ const ThreadsListing = ({ dataGetDisasterLocation }: ThreadsListingProps) => {
             type: "disaster-report",
           },
           {
+            id: 4,
             lastUpdated: "4 minutes",
             title:
               "Rumahku kebanjiran 1,5 Meter, butuh bantuan segera. ada bayi dan lansia!!",
@@ -102,113 +104,125 @@ const ThreadsListing = ({ dataGetDisasterLocation }: ThreadsListingProps) => {
 
   return (
     <IonList>
-      {threadsListingData.data.map((value, index) => {
-        return (
-          <IonCard className="thread-card">
-            <IonCardHeader
-              className="thread-card-header"
-              style={{
-                borderBottom: "solid 0.4px #EAEAEA",
-              }}
-            >
-              <IonItem lines="none" className="thread-card-header-content">
-                <IonAvatar
-                  slot="start"
-                  style={
-                    {
-                      // width: "24px",
-                      // height: "24px",
-                    }
-                  }
-                >
-                  <img src={value.authorAvatarUrl} alt={value.authorName} />
-                </IonAvatar>
-                <IonText>
-                  <p
-                    style={{
-                      fontSize: "14px",
-                      margin: 0,
-                    }}
-                  >
-                    {value.authorName}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: "10px",
-                      margin: 0,
-                    }}
-                  >
-                    {value.lastUpdated}
-                  </p>
-                </IonText>
-
-                <IonItem slot="end" lines="none" className="thread-card-header">
-                  <IonChip
-                    color={
-                      value.reportState === "unresovled" ? "success" : "danger"
-                    }
-                    style={{
-                      fontWeight: "bold",
-                      fontSize: "10px",
-                    }}
-                  >
-                    Laporan
-                  </IonChip>
-                  <IonButton shape="round" fill="clear" color="dark">
-                    <IonIcon slot="icon-only" icon={ellipsisVertical} />
-                  </IonButton>
-                </IonItem>
-              </IonItem>
-            </IonCardHeader>
-            <IonCardContent className="thread-content">
-              <IonItem lines="none" className="thread-location-display">
-                <IonIcon icon={locationOutline} />
-                <IonText
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "bold",
-                  }}
-                  color="dark"
-                >
-                  <span>{value.locationDisplay}</span>
-                </IonText>
-              </IonItem>
-              <IonText color="dark">
-                <h4
-                  style={{
-                    fontSize: "18px",
-                  }}
-                >
-                  {value.title}
-                </h4>
-              </IonText>
-              <IonItem lines="none" className="thread-card-action">
-                <IonButton fill="outline" className="thread-action-upvote">
-                  <IonIcon icon={caretUpOutline} />
-                  <IonLabel>{value.numberOfUpVote}</IonLabel>
-                </IonButton>
-                <IonButton fill="clear">
-                  <IonIcon icon={chatbubbleOutline} />
-                  <IonLabel className="ion-text-capitalize">
-                    Diskusi <strong>{value.numberOfReply}</strong>
-                  </IonLabel>
-                </IonButton>
-                <IonButton fill="clear" slot="end">
-                  <IonIcon icon={shareSocialOutline} />
-                </IonButton>
-                '
-              </IonItem>
-            </IonCardContent>
-          </IonCard>
-        );
-      })}
+      {threadsListingData.data.map((value) => (
+        <ThreadSummaryComponent key={value.id} data={value} />
+      ))}
     </IonList>
   );
 };
 
 type ThreadsListingDataType = {
   isLoading: boolean;
-  data: Array<Thread>;
+  data: Array<ThreadSummary>;
+};
+
+type ThreadSummaryProps = {
+  data: ThreadSummary;
+};
+
+const ThreadSummaryComponent: React.FC<ThreadSummaryProps> = ({ data }) => {
+  const history = useHistory();
+
+  const toThreadDetail = () => {
+    history.push("/thread-detail/" + data.id);
+  };
+
+  return (
+    <IonCard className="thread-card">
+      <IonCardHeader
+        className="thread-card-header"
+        style={{
+          borderBottom: "solid 0.4px #EAEAEA",
+        }}
+      >
+        <IonItem lines="none" className="thread-card-header-content">
+          <IonAvatar
+            slot="start"
+            style={
+              {
+                // width: "24px",
+                // height: "24px",
+              }
+            }
+          >
+            <img src={data.authorAvatarUrl} alt={data.authorName} />
+          </IonAvatar>
+          <IonText>
+            <p
+              style={{
+                fontSize: "14px",
+                margin: 0,
+              }}
+            >
+              {data.authorName}
+            </p>
+            <p
+              style={{
+                fontSize: "10px",
+                margin: 0,
+              }}
+            >
+              {data.lastUpdated}
+            </p>
+          </IonText>
+
+          <IonItem slot="end" lines="none" className="thread-card-header">
+            <IonChip
+              color={data.reportState === "unresovled" ? "success" : "danger"}
+              style={{
+                fontWeight: "bold",
+                fontSize: "10px",
+              }}
+            >
+              Laporan
+            </IonChip>
+            <IonButton shape="round" fill="clear" color="dark">
+              <IonIcon slot="icon-only" icon={ellipsisVertical} />
+            </IonButton>
+          </IonItem>
+        </IonItem>
+      </IonCardHeader>
+      <IonCardContent className="thread-content">
+        <IonItem lines="none" className="thread-location-display">
+          <IonIcon icon={locationOutline} />
+          <IonText
+            style={{
+              fontSize: "14px",
+              fontWeight: "bold",
+            }}
+            color="dark"
+          >
+            <span>{data.locationDisplay}</span>
+          </IonText>
+        </IonItem>
+        <IonText color="dark" onClick={toThreadDetail}>
+          <h4
+            style={{
+              fontSize: "18px",
+            }}
+          >
+            {data.title}
+          </h4>
+        </IonText>
+        <IonItem lines="none" className="thread-card-action">
+          <IonButton fill="outline" className="thread-action-upvote">
+            <IonIcon icon={caretUpOutline} />
+            <IonLabel>{data.numberOfUpVote}</IonLabel>
+          </IonButton>
+          <IonButton fill="clear" onClick={toThreadDetail}>
+            <IonIcon icon={chatbubbleOutline} />
+            <IonLabel className="ion-text-capitalize">
+              Diskusi <strong>{data.numberOfReply}</strong>
+            </IonLabel>
+          </IonButton>
+          <IonButton fill="clear" slot="end">
+            <IonIcon icon={shareSocialOutline} />
+          </IonButton>
+          '
+        </IonItem>
+      </IonCardContent>
+    </IonCard>
+  );
 };
 
 export default ThreadsListing;

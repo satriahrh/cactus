@@ -23,12 +23,16 @@ const GoogleMap = ({
         defaultCenter={defaultCenter}
         defaultZoom={15}
       >
+        <Marker
+          lat={defaultCenter.lat}
+          lng={defaultCenter.lng}
+          style={{ background: "blue" }}
+        />
         {dataGetDisaterLocations &&
-          dataGetDisaterLocations.map((value, index) => {
-            console.log(value.longitude, value.latitude);
+          dataGetDisaterLocations.map((value) => {
             return (
               <Marker
-                key={index}
+                key={value.district + "-" + value.city}
                 lat={value.latitude ? value.latitude : 0}
                 lng={value.longitude ? value.longitude : 0}
               />
@@ -42,6 +46,7 @@ const GoogleMap = ({
 type MarkerProps = {
   lat: number;
   lng: number;
+  style?: any;
 };
 const Marker: React.FC<MarkerProps> = (props: MarkerProps) => (
   <div {...props} className="marker" />
