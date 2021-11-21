@@ -2,9 +2,15 @@ import {
   IonAvatar,
   IonButton,
   IonButtons,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
   IonContent,
   IonIcon,
   IonItem,
+  IonLabel,
   IonList,
   IonPage,
   IonText,
@@ -46,6 +52,42 @@ const Profile: React.FC = () => {
             <IonButton slot="end" fill="clear" color="dark">
               <IonIcon slot="icon-only" icon={settingsOutline} />
             </IonButton>
+          </IonItem>
+          <IonItem lines="none">
+            <IonCard className="disaster-pack-card">
+              {/* <img src="/assets/disaster-pack-ilus.jpeg" width="100%" /> */}
+              <IonCardHeader>
+                <IonCardTitle
+                  color="light"
+                  style={{
+                    fontSize: "29px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Disaster Pack
+                </IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                <IonCardSubtitle
+                  color="light"
+                  style={{
+                    fontSize: "18px",
+                  }}
+                >
+                  Berlangganan kebutuhan bantuan serta peralatan darurat saat
+                  kamu mengalami bencana
+                </IonCardSubtitle>
+                <IonButton
+                  expand="block"
+                  size="large"
+                  className="ion-margin-top"
+                >
+                  <IonLabel color="light" className="ion-text-capitalize">
+                    Berlanggan Sekarang
+                  </IonLabel>
+                </IonButton>
+              </IonCardContent>
+            </IonCard>
           </IonItem>
         </IonList>
       </IonContent>
