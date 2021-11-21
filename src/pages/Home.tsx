@@ -60,7 +60,9 @@ const Home: React.FC = () => {
             dataAlertInfo={dataAlertInfo}
           />
         )}
-        {dataAlertInfo && <ReportDisaster dataAlertInfo={dataAlertInfo} />}
+        {dataAlertInfo && position && (
+          <ReportDisaster position={position} dataAlertInfo={dataAlertInfo} />
+        )}
         {dataGetDisaterLocations && (
           <DisasterLocation dataGetDisaterLocations={dataGetDisaterLocations} />
         )}
