@@ -8,6 +8,7 @@ import GoogleMap from "./Map.GoogleMap";
 import DisasterInformation from "./Map.DisaterInformation";
 import getDisasterLocations from "../services/getDisasterLocations";
 import { DataGetDisaterLocationsType } from "../entity/disasterLocation";
+import { DataAlertInfoType } from "./Home.Types";
 
 const Map: React.FC = () => {
   const [position, setPosition] = useState<Geoposition>();
@@ -21,6 +22,17 @@ const Map: React.FC = () => {
   useEffect(() => {
     getDisasterLocations(position, setDataGetDisasterLocations);
   }, [position, setDataGetDisasterLocations]);
+
+  const [dataAlertInfo, setDataAlertInfo] = useState<DataAlertInfoType>();
+  useEffect(() => {
+    // Get Alert Info by Lat Long
+    if (position) {
+      setDataAlertInfo({
+        when: "12 Nov 2021",
+        willDisaster: true,
+      });
+    }
+  }, [position]);
 
   return (
     <IonPage>
@@ -37,6 +49,7 @@ const Map: React.FC = () => {
         <DisasterInformation
           position={position}
           dataGetDisaterLocations={dataGetDisaterLocations}
+          dataAlertInfo={dataAlertInfo}
         />
       </IonContent>
     </IonPage>

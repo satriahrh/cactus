@@ -15,11 +15,18 @@
   box-shadow: 0px 0px 18px rgba(0, 56, 255, 0.7);
 }
 
+.disaster-report {
+  z-index: 10;
+  margin-top: 60vh;
+  width: 100%;
+  text-align: center;
+  min-height: 44px;
+  padding: 8px 16px;
+}
+
 .disaster-information-root {
   position: absolute;
   z-index: 10;
-  margin-top: 65vh;
-  padding-top: 10px;
   width: 100%;
   height: fit-content;
   min-height: 100vh;
@@ -41,6 +48,7 @@
   --padding-start: 24px;
   --inner-padding-end: 0;
   --padding-end: 24px;
+  --background: none;
 }
 .mitigasi-banjir {
   color: var(--ion-color-light);

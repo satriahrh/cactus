@@ -12,7 +12,7 @@ const GoogleMap = ({
   return (
     <div
       style={{
-        height: "78vh",
+        height: "82vh",
         width: "100%",
         position: "absolute",
       }}
